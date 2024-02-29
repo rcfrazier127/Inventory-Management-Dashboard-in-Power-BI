@@ -1,5 +1,7 @@
 # Inventory-Management-Dashboard-in-Power-BI
 
+# For the fully interactive Power BI report, please view my portfolio on (https://www.novypro.com/project/inventory-management-dashboard-1)
+
 ### Introduction
 
 ### Data Preparation
