@@ -1,6 +1,6 @@
-# SQL Views
+#SQL Views
 
-### These are the views used to import the necessary data from our DW into Power BI.
+###These are the views used to import the necessary data from our DW into Power BI.
 
 ----------------------------------------------------------------------------------
 ### dbo.vIntentoryTable
