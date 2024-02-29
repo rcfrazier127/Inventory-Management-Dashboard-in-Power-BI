@@ -1,1 +1,367 @@
 
+
+
+---------------------------------------------------------------------------------------------------------------
+Aging Stock % Difference = 
+VAR AgingStockCY = SUM('Inventory'[Aging Stock])
+VAR AgingStockLY = 'Inventory Measures'[Aging Stock LY]
+VAR AgingStockDifference =
+    IF(ISBLANK(AgingStockLY), BLANK(),
+        DIVIDE(AgingStockCY - AgingStockLY, AgingStockLY, 0)
+    )
+VAR Arrow =
+    IF(AgingStockDifference < 0, UNICHAR(9660), IF(AgingStockDifference > 0, UNICHAR(9650), "")
+    )
+RETURN
+    IF(ISBLANK(AgingStockCY) || ISBLANK(AgingStockLY),
+        BLANK(),
+        FORMAT(AgingStockDifference, "##.##% " & Arrow & " ")
+    )
+
+---------------------------------------------------------------------------------------------------------------
+Aging Stock Difference = 
+VAR AgingStockCY = SUM('Inventory'[Aging Stock])
+VAR AgingStockLY = [Aging Stock LY]
+
+RETURN
+IF(ISBLANK(AgingStockLY), BLANK(),
+    DIVIDE(AgingStockCY - AgingStockLY, AgingStockLY, 0)
+)
+
+---------------------------------------------------------------------------------------------------------------
+Aging Stock LY = 
+CALCULATE(
+    SUM('Inventory'[Aging Stock]), DATEADD('Date'[Date], -1, YEAR)
+    )
+
+---------------------------------------------------------------------------------------------------------------
+Avg Stock Value = 
+AVERAGEX('Inventory',
+    'Inventory'[Units In Stock] *
+        'Inventory'[Unit Price])
+
+---------------------------------------------------------------------------------------------------------------
+COGS % Difference = 
+VAR COGSCY = SUM('Inventory'[Total Cost])
+VAR COGSLY = 'Inventory Measures'[Total Cost LY]
+VAR COGSDifference =
+    IF(ISBLANK(COGSLY), BLANK(),
+        DIVIDE(COGSCY - COGSLY, COGSLY, 0)
+    )
+VAR Arrow =
+    IF(COGSDifference < 0, UNICHAR(9660), IF(COGSDifference > 0, UNICHAR(9650), "")
+    )
+RETURN
+    IF(ISBLANK(COGSCY) || ISBLANK(COGSLY),
+        BLANK(),
+        FORMAT(COGSDifference, "##.##% " & Arrow & " ")
+    )
+
+---------------------------------------------------------------------------------------------------------------
+COGS Difference = 
+VAR COGSCY = SUM('Inventory'[Total Cost])
+VAR COGSLY = [Total Cost LY]
+
+RETURN
+IF(ISBLANK(COGSLY), BLANK(),
+    DIVIDE(COGSCY - COGSLY, COGSLY, 0)
+)
+
+---------------------------------------------------------------------------------------------------------------
+Ending Inventory = 
+CALCULATE(
+    SUM('Inventory'[Units Sold]),
+    FILTER(
+        ALL('Date'),
+        'Date'[Date] <= MAX('Date'[Date])
+    )
+)
+
+---------------------------------------------------------------------------------------------------------------
+Inventory LY = 
+CALCULATE(
+    [Inventory Value], DATEADD('Date'[Date], -1, YEAR)
+    )
+
+---------------------------------------------------------------------------------------------------------------
+Inventory Turnover = 
+CALCULATE(
+    SUM(
+        'Inventory'[Total Cost]) /
+            (
+                ([Starting Inventory] + [Ending Inventory]) / 
+                    2)
+    )
+
+---------------------------------------------------------------------------------------------------------------
+Inventory Turnover % Difference = 
+VAR InventoryTurnoverCY = [Inventory Turnover]
+VAR InventoryTurnoverLY = [Inventory Turnover LY]
+VAR InventoryTurnoverDifference =
+    IF(ISBLANK(InventoryTurnoverLY), BLANK(),
+        DIVIDE(InventoryTurnoverCY - InventoryTurnoverLY, InventoryTurnoverLY, 0)
+    )
+VAR Arrow =
+    IF(InventoryTurnoverDifference < 0, UNICHAR(9660), IF(InventoryTurnoverDifference > 0, UNICHAR(9650), "")
+    )
+RETURN
+    IF(ISBLANK(InventoryTurnoverCY) || ISBLANK(InventoryTurnoverLY),
+        BLANK(),
+        FORMAT(InventoryTurnoverDifference, "##.##% " & Arrow & " ")
+    )
+
+---------------------------------------------------------------------------------------------------------------
+Inventory Turnover Difference = 
+VAR InventoryTurnoverCY = [Inventory Turnover]
+VAR InventoryTurnoverLY = [Inventory Turnover LY]
+
+RETURN
+IF(ISBLANK(InventoryTurnoverLY), BLANK(),
+    DIVIDE(InventoryTurnoverCY - InventoryTurnoverLY, InventoryTurnoverLY, 0)
+)
+
+---------------------------------------------------------------------------------------------------------------
+Inventory Turnover LY = 
+CALCULATE(
+    [Inventory Turnover], DATEADD('Date'[Date], -1, YEAR)
+    )
+
+---------------------------------------------------------------------------------------------------------------
+Inventory Value = 
+SUMX('Inventory',
+    'Inventory'[Units In Stock] *
+        'Inventory'[Unit Price])
+
+
+Inventory Value Difference = 
+VAR StockValueCY = [Inventory Value]
+VAR StockValueLY = [Inventory LY]
+
+RETURN
+IF(ISBLANK(StockValueLY), BLANK(),
+    DIVIDE(StockValueCY - StockValueLY, StockValueLY, 0)
+)
+
+---------------------------------------------------------------------------------------------------------------
+Inventory Value % Difference = 
+VAR StockValueCY = [Inventory Value]
+VAR StockValueLY = 'Inventory Measures'[Inventory LY]
+VAR StockValueDifference =
+    IF(ISBLANK(StockValueLY), BLANK(),
+        DIVIDE(StockValueCY - StockValueLY, StockValueLY, 0)
+    )
+VAR Arrow =
+    IF(StockValueDifference < 0, UNICHAR(9660), IF(StockValueDifference > 0, UNICHAR(9650), "")
+    )
+RETURN
+    IF(ISBLANK(StockValueCY) || ISBLANK(StockValueLY),
+        BLANK(),
+        FORMAT(StockValueDifference, "##.##% " & Arrow & " ")
+    )
+
+---------------------------------------------------------------------------------------------------------------
+Inventory Value Difference = 
+VAR StockValueCY = [Inventory Value]
+VAR StockValueLY = [Inventory LY]
+
+RETURN
+IF(ISBLANK(StockValueLY), BLANK(),
+    DIVIDE(StockValueCY - StockValueLY, StockValueLY, 0)
+)
+
+---------------------------------------------------------------------------------------------------------------
+Return Rate = 
+DIVIDE(
+    SUM('Inventory'[Units Returned]), 
+        SUM('Inventory'[Units Sold])
+)
+
+---------------------------------------------------------------------------------------------------------------
+Return Rate % Difference = 
+VAR ReturnRateCY = [Return Rate]
+VAR ReturnRateLY = 'Inventory Measures'[Return Rate LY]
+VAR ReturnRateDifference =
+    IF(ISBLANK(ReturnRateLY), BLANK(),
+        DIVIDE(ReturnRateCY - ReturnRateLY, ReturnRateLY, 0)
+    )
+VAR Arrow =
+    IF(ReturnRateDifference < 0, UNICHAR(9660), IF(ReturnRateDifference > 0, UNICHAR(9650), "")
+    )
+RETURN
+    IF(ISBLANK(ReturnRateCY) || ISBLANK(ReturnRateLY),
+        BLANK(),
+        FORMAT(ReturnRateDifference, "##.##% " & Arrow & " ")
+    )
+
+---------------------------------------------------------------------------------------------------------------
+Return Rate Difference = 
+VAR ReturnRateCY = [Return Rate]
+VAR ReturnRateLY = [Return Rate LY]
+
+RETURN
+IF(ISBLANK(ReturnRateLY), BLANK(),
+    DIVIDE(ReturnRateCY - ReturnRateLY, ReturnRateLY, 0)
+)
+
+---------------------------------------------------------------------------------------------------------------
+Return Rate LY = 
+CALCULATE(
+    [Return Rate], DATEADD('Date'[Date], -1, YEAR)
+    )
+
+---------------------------------------------------------------------------------------------------------------
+Sales % Difference = 
+VAR SalesCY = [Total Sales]
+VAR SalesLY = [Sales LY]
+VAR SalesDifference =
+    IF(ISBLANK(SalesLY), BLANK(),
+        DIVIDE(SalesCY - SalesLY, SalesLY, 0)
+    )
+VAR Arrow =
+    IF(SalesDifference < 0, UNICHAR(9660), IF(SalesDifference > 0, UNICHAR(9650), "")
+    )
+RETURN
+    IF(ISBLANK(SalesCY) || ISBLANK(SalesLY),
+        BLANK(),
+        FORMAT(SalesDifference, "##.##% " & Arrow & " ")
+    )
+
+---------------------------------------------------------------------------------------------------------------
+Sales Difference = 
+VAR SalesCY = [Total Sales]
+VAR SalesLY = [Sales LY]
+
+RETURN
+IF(ISBLANK(SalesLY), BLANK(),
+    DIVIDE(SalesCY - SalesLY, SalesLY, 0)
+)
+
+---------------------------------------------------------------------------------------------------------------
+Sales LY = 
+CALCULATE(
+    [Total Sales], DATEADD('Date'[Date], -1, YEAR)
+    )
+
+---------------------------------------------------------------------------------------------------------------
+Starting Inventory = 
+CALCULATE(
+    SUM('Inventory'[Units Sold]),
+    FILTER(
+        ALL('Date'),
+        'Date'[Date] < MIN('Date'[Date])
+    )
+)
+
+---------------------------------------------------------------------------------------------------------------
+Total Cost LY = 
+CALCULATE(
+    SUM('Inventory'[Total Cost]), DATEADD('Date'[Date], -1, YEAR)
+    )
+
+---------------------------------------------------------------------------------------------------------------
+Total Sales = 
+SUMX(
+    'Inventory',
+        'Inventory'[Units Sold] * 'Inventory'[Unit Price]
+)
+
+---------------------------------------------------------------------------------------------------------------
+Units In Stock % Difference = 
+VAR UnitsInStockCY = SUM('Inventory'[Units In Stock])
+VAR UnitsInStockLY = 'Inventory Measures'[Units In Stock LY]
+VAR UnitsInStockDifference =
+    IF(ISBLANK(UnitsInStockLY), BLANK(),
+        DIVIDE(UnitsInStockCY - UnitsInStockLY, UnitsInStockLY, 0)
+    )
+VAR Arrow =
+    IF(UnitsInStockDifference < 0, UNICHAR(9660), IF(UnitsInStockDifference > 0, UNICHAR(9650), "")
+    )
+RETURN
+    IF(ISBLANK(UnitsInStockCY) || ISBLANK(UnitsInStockLY),
+        BLANK(),
+        FORMAT(UnitsInStockDifference, "##.##% " & Arrow & " ")
+    )
+
+---------------------------------------------------------------------------------------------------------------
+Units In Stock Difference = 
+VAR UnitsInStockCY = SUM('Inventory'[Units In Stock])
+VAR UnitsInStockLY = [Units In Stock LY]
+
+RETURN
+IF(ISBLANK(UnitsInStockLY), BLANK(),
+    DIVIDE(UnitsInStockCY - UnitsInStockLY, UnitsInStockLY, 0)
+)
+
+---------------------------------------------------------------------------------------------------------------
+Units In Stock LY = 
+CALCULATE(
+    SUM('Inventory'[Units In Stock]), DATEADD('Date'[Date], -1, YEAR)
+    )
+
+---------------------------------------------------------------------------------------------------------------
+Units On Order % Difference = 
+VAR UnitsOnOrderCY = SUM('Inventory'[Units On Order])
+VAR UnitsOnOrderLY = 'Inventory Measures'[Units On Order LY]
+VAR UnitsOnOrderDifference =
+    IF(ISBLANK(UnitsOnOrderLY), BLANK(),
+        DIVIDE(UnitsOnOrderCY - UnitsOnOrderLY, UnitsOnOrderLY, 0)
+    )
+VAR Arrow =
+    IF(UnitsOnOrderDifference < 0, UNICHAR(9660), IF(UnitsOnOrderDifference > 0, UNICHAR(9650), "")
+    )
+RETURN
+    IF(ISBLANK(UnitsOnOrderCY) || ISBLANK(UnitsOnOrderLY),
+        BLANK(),
+        FORMAT(UnitsOnOrderDifference, "##.##% " & Arrow & " ")
+    )
+
+---------------------------------------------------------------------------------------------------------------
+Units On Order Difference = 
+VAR UnitsOnOrderCY = SUM('Inventory'[Units On Order])
+VAR UnitsOnOrderLY = [Units On Order LY]
+
+RETURN
+IF(ISBLANK(UnitsOnOrderLY), BLANK(),
+    DIVIDE(UnitsOnOrderCY - UnitsOnOrderLY, UnitsOnOrderLY, 0)
+)
+
+---------------------------------------------------------------------------------------------------------------
+Units On Order LY = 
+CALCULATE(
+    SUM('Inventory'[Units On Order]), DATEADD('Date'[Date], -1, YEAR)
+    )
+
+---------------------------------------------------------------------------------------------------------------
+Units Returned % Difference = 
+VAR UnitsReturnedCY = SUM('Inventory'[Units Returned])
+VAR UnitsReturnedLY = 'Inventory Measures'[Units Returned LY]
+VAR UnitsReturnedDifference =
+    IF(ISBLANK(UnitsReturnedLY), BLANK(),
+        DIVIDE(UnitsReturnedCY - UnitsReturnedLY, UnitsReturnedLY, 0)
+    )
+VAR Arrow =
+    IF(UnitsReturnedDifference < 0, UNICHAR(9660), IF(UnitsReturnedDifference > 0, UNICHAR(9650), "")
+    )
+RETURN
+    IF(ISBLANK(UnitsReturnedCY) || ISBLANK(UnitsReturnedLY),
+        BLANK(),
+        FORMAT(UnitsReturnedDifference, "##.##% " & Arrow & " ")
+    )
+
+---------------------------------------------------------------------------------------------------------------
+Units Returned Difference = 
+VAR UnitsReturnedCY = SUM('Inventory'[Units Returned])
+VAR UnitsReturnedLY = [Units Returned LY]
+
+RETURN
+IF(ISBLANK(UnitsReturnedLY), BLANK(),
+    DIVIDE(UnitsReturnedCY - UnitsReturnedLY, UnitsReturnedLY, 0)
+)
+
+---------------------------------------------------------------------------------------------------------------
+Units Returned LY = 
+CALCULATE(
+    SUM('Inventory'[Units Returned]), DATEADD('Date'[Date], -1, YEAR)
+    )
+
+---------------------------------------------------------------------------------------------------------------
