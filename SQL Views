@@ -1,1 +1,48 @@
+# SQL Views
+
+### These are the views used to import the necessary data from our DW into Power BI.
+
+----------------------------------------------------------------------------------
+### dbo.vIntentoryTable
+
+USE [ContosoRetailDW]
+GO
+
+SELECT [InventoryKey]
+      ,[DateKey]
+      ,[ProductKey]
+      ,[OnHandQuantity]
+      ,[OnOrderQuantity]
+      ,[SafetyStockQuantity]
+      ,[DaysInStock]
+      ,[Aging]
+      ,[UnitPrice]
+      ,[SalesQuantity]
+      ,[SalesAmount]
+      ,[ReturnQuantity]
+      ,[ReturnAmount]
+      ,[TotalCost]
+      ,[UnitCost]
+  FROM [dbo].[vInventoryTable]
+
+GO
+
+----------------------------------------------------------------------------------
+### dbo.vProductTable
+
+USE [ContosoRetailDW]
+GO
+
+SELECT [ProductKey]
+      ,[ProductSubcategoryKey]
+      ,[ProductName]
+      ,[Manufacturer]
+      ,[StockTypeName]
+      ,[Status]
+  FROM [dbo].[vProductTable]
+
+GO
+
+----------------------------------------------------------------------------------
+
 
