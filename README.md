@@ -1,17 +1,17 @@
 # Inventory-Management-Dashboard-in-Power-BI
 
-###Introduction
+### Introduction
 
-###Data Preparation
+### Data Preparation
 
 <img width="995" alt="image" src="https://github.com/rcfrazier127/Inventory-Management-Dashboard-in-Power-BI/assets/63532077/5a352189-1a69-433e-9ef7-d0e31bbb7bc1">
 
 
-###Data Model
+### Data Model
 
 <img width="765" alt="image" src="https://github.com/rcfrazier127/Inventory-Management-Dashboard-in-Power-BI/assets/63532077/9ef0d836-a965-461e-a80f-462ddb3e1484">
 
-###Dashboard
+### Dashboard
 
 <img width="1543" alt="image" src="https://github.com/rcfrazier127/Inventory-Management-Dashboard-in-Power-BI/assets/63532077/ace773ad-045b-47a8-9f17-83452fa10390">
 
