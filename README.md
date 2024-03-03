@@ -20,11 +20,14 @@ Since this data was uploaded from a source containing Microsoft's Contoso sample
 
 The data model is very simple and conists of a central fact table followed by multiple dimension tables and a measures table.
 
+
 ### Dashboard
 
 <img width="1482" alt="image" src="https://github.com/rcfrazier127/Inventory-Management-Dashboard-in-Power-BI/assets/63532077/e002196f-bbd7-4c16-bf09-c21e4df56190">
 
-The upper row of KPIs were created using the newly updated verison of Power BI's "KPI card" visual. The 
+The upper row of KPIs were created using the newly updated verison of Power BI's "KPI card" visual. The main functionality of this dashboard is the ability to lookup individual SKU's to isolate items and further examine inventory metrics, such as stock turnover, stock value, items in stock, items on order, return rates, and other relevant financial figures. The inclusion of historical data is to allow users to examine previous periods to view how trends, rates, and demand has behaved over time. Visuals can be toggled via bookmarks to examine weekly trends, how stock is broken by stock type (high, mid, and low moving stock), and measuring sales and total stock value against COGS over time. 
+
 
 <img width="1481" alt="image" src="https://github.com/rcfrazier127/Inventory-Management-Dashboard-in-Power-BI/assets/63532077/e0ea4477-0033-4a45-b52f-743a53e48a4b">
 
+The screenshot above is the view seen when the "Total Value" bookmark is selected. "Units Sold" is not displayed because it is identical to "Total Sales."
