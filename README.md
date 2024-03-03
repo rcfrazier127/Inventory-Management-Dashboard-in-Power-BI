@@ -4,7 +4,7 @@
 
 ### Introduction
 
-The development of this dashboard involved the extraction of data from an om-premise data warehouse in SQL Server Management Studio using views. The dataset consists of approximately 5 million rows. This inventory management solution allows for users to search items by SKU number and examine how various inventory metrics fluctuate in certain time periods.
+The development of this dashboard involved the extraction of data from an om-premise data warehouse in SQL Server Management Studio using views. The dataset consists of approximately 5 million rows and the views were kept very simple as all of the calculations used were created in Power Query during the transformation phase. This inventory management solution allows for users to search items by SKU number and examine how various inventory metrics fluctuate in certain time periods.
 
 
 ### Data Preparation
