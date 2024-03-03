@@ -2,7 +2,9 @@
 
 ***These are the views used to import the necessary data from our DW into Power BI.
 
-----------------------------------------------------------------------------------
+
+NOTE: These views display the data that was NOT removed during preprocessing due to lack of relevance.
+------------------------------------------------------------------------------------------------------
 ### dbo.vIntentoryTable
 
 USE [ContosoRetailDW]
@@ -27,7 +29,7 @@ SELECT [InventoryKey]
 
 GO
 
-----------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------
 ### dbo.vProductTable
 
 USE [ContosoRetailDW]
@@ -43,6 +45,17 @@ SELECT [ProductKey]
 
 GO
 
-----------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------
+### dbo.vProductCategoryTable
 
+USE [ContosoRetailDW]
+GO
 
+SELECT [ProductCategoryKey]
+      ,[ProductCategoryName]
+      ,[ProductSubcategoryName]
+  FROM [dbo].[vProductCategoryTable]
+
+GO
+
+------------------------------------------------------------------------------------------------------
